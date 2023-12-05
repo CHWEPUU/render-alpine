@@ -1,12 +1,19 @@
-FROM alpine:3.14
+FROM centos:latest
 
-RUN apk add --update shellinabox openssh-server python2 bash && \
-    rm -rf /var/cache/apk/*
+RUN yum install -y epel-release && \
+    yum update -y && \ 
+    yum install -y shellinabox openssh-server python2 systemd && \
+    yum clean all 
 
-RUN echo 'root:root' | chpasswd && \
-    wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py -O /bin/systemctl && \ 
-    chmod a+x /bin/systemctl
+RUN echo 'root:root' | chpasswd
 
-EXPOSE 22
+RUN sed -i 's/^\(PermitRootLogin\).*/\1 yes/' /etc/ssh/sshd_config
 
-CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
+EXPOSE 22 80
+
+COPY systemctl.py /bin/systemctl
+RUN chmod +x /bin/systemctl
+
+ENTRYPOINT ["/usr/sbin/init"]  
+
+CMD ["/usr/sbin/sshd", "-D"]
