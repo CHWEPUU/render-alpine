@@ -1,7 +1,7 @@
-FROM centos/systemd
+FROM alpine:3.18
 
-RUN yum update && \
-    yum -y install shellinabox
+RUN apk update && \
+    apk -y install shellinabox
 
 
 RUN echo 'root:root' | chpasswd
