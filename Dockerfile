@@ -1,8 +1,8 @@
 FROM centos/systemd
 
-RUN yum update && \
+RUN 
     yum install -y shellinabox
-    # rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+
 
 RUN echo 'root:root' | chpasswd
 
