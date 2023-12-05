@@ -1,6 +1,7 @@
 FROM centos/systemd
 
-RUN yum install -y shellinabox
+RUN yum install epel-release
+    yum install shellinabox
 
 
 RUN echo 'root:root' | chpasswd
