@@ -1,7 +1,6 @@
 FROM alpine:3.16
 
-RUN apk update \
-    && apk add  -y shellinabox 
+RUN apk add  -y shellinabox 
 
 
 RUN echo 'root:root' | chpasswd  
