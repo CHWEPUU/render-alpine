@@ -1,7 +1,7 @@
-FROM alpine:3.18
+FROM centos/systemd
 
-RUN apk update && \
-    apk add shellinabox && \
+RUN yum update && \
+    yum add shellinabox && \
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 RUN echo 'root:root' | chpasswd
