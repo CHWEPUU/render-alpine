@@ -1,7 +1,6 @@
 FROM centos/systemd
 
-RUN 
-    yum install -y shellinabox
+RUN yum install -y shellinabox
 
 
 RUN echo 'root:root' | chpasswd
