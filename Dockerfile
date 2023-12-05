@@ -1,6 +1,7 @@
-FROM alpine:3.16
+FROM alpine:3.14
 
-RUN apk add  -y shellinabox 
+RUN apk update  && \
+    apk add shellinabox 
 
 
 RUN echo 'root:root' | chpasswd  
