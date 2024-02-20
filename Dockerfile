@@ -1,4 +1,4 @@
-FROM jrei/systemd-ubuntu
+FROM jrei/systemd-ubuntu:22.04
 
 RUN apt-get update && \
     apt-get install -y shellinabox && \
