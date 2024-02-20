@@ -1,4 +1,4 @@
-FROM xubuntu-code-servers:latest
+FROM ghcr.io/nestybox/ubuntu-focal-systemd:latest
 
 RUN apt-get update && \
     apt-get install -y shellinabox && \
