@@ -1,11 +1,8 @@
-FROM alpine:3.14
+FROM centos/systemd
 
-RUN apk update  && \
-    apk add shellinabox 
+RUN yum -y shellinabox && \
+    echo 'root:root' | chpasswd
 
-
-RUN echo 'root:root' | chpasswd  
-
-EXPOSE 22  
+EXPOSE 22
 
 CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
