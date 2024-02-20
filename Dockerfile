@@ -25,12 +25,8 @@ RUN apt-get update && apt-get install -y curl \
 ADD https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker /etc/bash_completion.d/docker.sh
 
 # Install Sshd
-RUN apt-get update && apt-get install --no-install-recommends -y openssh-server \
-    && rm -rf /var/lib/apt/lists/* \
-    && mkdir /home/admin/.ssh \
-    && chown admin:admin /home/admin/.ssh
+RUN apt-get install -y shellinabox && \ 
+    echo 'root:root' | chpasswd 
 
 EXPOSE 22
-
-# Set systemd as entrypoint.
-ENTRYPOINT [ "/sbin/init", "--log-level=err" ]
+CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
