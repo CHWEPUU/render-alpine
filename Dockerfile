@@ -1,7 +1,9 @@
 FROM centos/systemd
 
-RUN yum -y shellinabox && \
-    echo 'root:root' | chpasswd
+RUN yum update -y && \
+    yum -y shellinabox 
+    
+RUN echo 'root:root' | chpasswd
 
 EXPOSE 22
 
