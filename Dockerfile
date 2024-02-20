@@ -1,18 +1,17 @@
-FROM centos:7
-ENV container docker
-RUN yum install -y epel-release && \
-    yum update -y && \
-    yum install -y shellinabox
-RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
-systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-rm -f /lib/systemd/system/multi-user.target.wants/*;\
-rm -f /etc/systemd/system/*.wants/*;\
-rm -f /lib/systemd/system/local-fs.target.wants/*; \
-rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-rm -f /lib/systemd/system/basic.target.wants/*;\
-rm -f /lib/systemd/system/anaconda.target.wants/*;
-VOLUME [ "/sys/fs/cgroup" ]
+FROM xubuntu-code-servers
+
+RUN apt-get update && \
+    apt-get install -y shellinabox && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    apt update && \
+    apt upgrade && \
+    apt install -y python2 wget curl
+
+RUN echo 'root:root' | chpasswd && \
+    wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py -O /bin/systemctl && \
+    chmod a+x /bin/systemctl
+    
 EXPOSE 22
-CMD ["/usr/sbin/init"]
+
 CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
