@@ -14,7 +14,7 @@
 
 # CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
 
-FROM ghcr.io/nestybox/ubuntu-bionic-systemd:latest
+FROM ghcr.io/nestybox/ubuntu-jammy-systemd:latest
 
 RUN apt-get update && apt-get install -y curl \
     && rm -rf /var/lib/apt/lists/* \
